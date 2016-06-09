@@ -40,5 +40,17 @@ RSpec.feature "Creating Kegs" do
     expect(page).to have_content("Serial number has already been taken")
   end
 
+  scenario "A serial number must follow the correct formatting" do
+
+    visit new_keg_path
+    fill_in "keg[serial_number]", with: "12345"
+    click_button "Add Keg"
+
+    within("div.warning") do
+      expect(page).to have_content("The keg was not added")
+    end
+    expect(page).to have_content("Please use a properly formatted serial number")
+  end
+
 
 end

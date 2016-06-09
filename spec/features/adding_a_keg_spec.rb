@@ -25,7 +25,19 @@ RSpec.feature "Creating Kegs" do
     within("div.warning") do
       expect(page).to have_content("The keg was not added")
     end
-    expect(page).to_not have_current_path(keg_path(1))
+  end
+
+  scenario "A serial number must be unique" do
+
+    Keg.create(serial_number: "16-123456B")
+    visit new_keg_path
+    fill_in "keg[serial_number]", with: "16-123456B"
+    click_button "Add Keg"
+
+    within("div.warning") do
+      expect(page).to have_content("The keg was not added")
+    end
+    expect(page).to have_content("Serial number has already been taken")
   end
 
 

@@ -11,15 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160609020237) do
+ActiveRecord::Schema.define(version: 20160614025635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "kegs", force: :cascade do |t|
     t.text     "serial_number"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+    t.string   "status",        default: "Empty"
+    t.string   "location",      default: "Teeccino Warehouse"
   end
 
 end

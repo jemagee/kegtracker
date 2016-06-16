@@ -1,5 +1,5 @@
 FactoryGirl.define do
 	factory :keg do
-		serial_number "16-234516B"
+		sequence(:serial_number) { |n| "16-23451#{n}B" }
 	end
 end

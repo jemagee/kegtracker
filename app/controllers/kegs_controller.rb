@@ -1,4 +1,7 @@
 class KegsController < ApplicationController
+
+  before_action :find_keg, only: [:show, :edit, :update, :destroy]
+
   def new
     @keg = Keg.new
   end
@@ -9,7 +12,7 @@ class KegsController < ApplicationController
       flash[:success] = "Keg has been added"
       redirect_to @keg
     else
-      flash[:warning] = "The keg was not added"
+      flash.now[:warning] = "The keg was not added"
       render 'new'
     end
   end
@@ -19,12 +22,29 @@ class KegsController < ApplicationController
   end
 
   def show
-    @keg = Keg.find(params[:id])
   end
+
+  def edit
+  end
+
+  def update
+    if @keg.update(keg_params)
+      flash[:success] = "The keg was updated successfully"
+      redirect_to @keg
+    else
+      flash.now[:warning] = "The keg was not updated"
+      render 'edit'
+    end
+  end
+
 
   private
 
     def keg_params
       params.require(:keg).permit(:serial_number)
+    end
+
+    def find_keg
+      @keg = Keg.find(params[:id])
     end
 end

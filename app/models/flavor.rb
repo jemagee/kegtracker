@@ -6,5 +6,10 @@ class Flavor < ActiveRecord::Base
   def abbreviation=(value)
     write_attribute(:abbreviation, value.upcase)
   end
+
+  def archive
+    self.archive = true
+    self.save
+  end
   
 end

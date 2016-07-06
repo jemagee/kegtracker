@@ -1,9 +1,7 @@
-<% if @keg.errors.any? %>
-  <% @keg.errors.full_messages.each do |msg| %>
-    <%= msg %>
-  <% end %>
+<% if keg.errors.any? %>
+  <%= render 'layouts/errors', object: keg %>
 <% end %>
-<%= form_for(@keg) do |f| %>
+<%= form_for(keg) do |f| %>
 
   <%= f.label :serial_number %>
   <%= f.text_field :serial_number %>

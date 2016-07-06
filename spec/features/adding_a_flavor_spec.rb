@@ -37,7 +37,7 @@ RSpec.feature "Adding a new flavor" do
 
       expect(page).to have_content("The flavor was not created")
       expect(page).to_not have_content("ABCD")
-      expect(page).to have_content("The flavor name must be at 6 characters (with no numbers)")
+      expect(page).to have_content("The flavor name must be at least 6 characters (with no numbers)")
     end
 
     scenario "Flavor name is made up of only letters and spaces" do
@@ -47,7 +47,7 @@ RSpec.feature "Adding a new flavor" do
 
       expect(page).to have_content("The flavor was not created")
       expect(page).to_not have_content("ABCD")
-      expect(page).to have_content("The flavor name must be at 6 characters (with no numbers)")
+      expect(page).to have_content("The flavor name must be at least 6 characters (with no numbers)")
     end
   end
 

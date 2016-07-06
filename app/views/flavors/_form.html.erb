@@ -1,0 +1,13 @@
+<% if flavor.errors.any? %>
+	<%= render 'layouts/errors', object: flavor %>
+<% end %>
+<%= form_for(flavor) do |f| %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :abbreviation %>
+  <%= f.text_field :abbreviation %>
+
+  <%= f.submit %>
+<% end %>

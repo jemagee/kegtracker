@@ -23,9 +23,17 @@ RSpec.feature "Editing a Flavor" do
 
   scenario "Bad Flavor Name" do
     fill_in "flavor[name]", with: "No"
-
     click_button "Update Flavor"
+
     expect(page).to have_content("The flavor was not updated")
     expect(page).to have_content("The flavor name must be at least 6 characters")
+  end
+
+  scenario "Bad Flavor abbreviation" do
+    fill_in "flavor[abbreviation]", with: "GDNGHDJ"
+    click_button "Update Flavor"
+
+    expect(page).to have_content("The flavor was not updated")
+    expect(page).to have_content("four letters only")
   end
 end

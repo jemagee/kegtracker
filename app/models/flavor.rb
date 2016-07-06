@@ -9,7 +9,6 @@ class Flavor < ActiveRecord::Base
 
   def archive
     self.archive = true
-    self.save
   end
   
 end

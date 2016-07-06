@@ -1,6 +1,6 @@
 class FlavorsController < ApplicationController
 
-  before_action :get_flavor, only: [:show, :edit, :destroy]
+  before_action :get_flavor, only: [:show, :edit, :destroy, :update]
 
   def index
     @flavors = Flavor.all
@@ -21,6 +21,19 @@ class FlavorsController < ApplicationController
   end
 
   def show
+  end
+
+  def edit
+  end
+
+  def update
+    if @flavor.update_attributes(flavor_params)
+      flash[:success] = "The flavor was updated"
+      redirect_to @flavor
+    else
+      flash[:warning] = "The flavor was not updated"
+      render 'edit'
+    end
   end
 
   def destroy

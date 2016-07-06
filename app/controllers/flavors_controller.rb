@@ -24,7 +24,7 @@ class FlavorsController < ApplicationController
   end
 
   def destroy
-    @flavor.archive
+    @flavor.destroy
     flash[:success] = "#{@flavor.name} has been successfully archived"
     redirect_to flavors_path
   end

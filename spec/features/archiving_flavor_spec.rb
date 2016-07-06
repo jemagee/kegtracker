@@ -8,6 +8,7 @@ RSpec.feature "Archiving (using delete/destroy) a flavor" do
 
     visit flavors_path
     click_link "Archive Flavor"
+    flavor.reload
 
     expect(page).to have_content("#{flavor.name} has been successfully archived")
     expect(flavor.archive).to eq true

@@ -39,7 +39,7 @@ class KegsController < ApplicationController
 
   def destroy
     @keg.destroy
-    flash[:success] = "The keg was deleted"
+    flash[:success] = "The keg was retired"
     redirect_to kegs_path
   end
 

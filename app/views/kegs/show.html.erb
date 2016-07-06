@@ -8,4 +8,4 @@
   Location: <%= @keg.location %>
 </div>
 <%= link_to "Edit Keg", edit_keg_path(@keg) %>
-<%= link_to "Delete Keg", keg_path(@keg), method: :delete, data: {confirm: "Are you sure you want to delete this keg?"} %>
+<%= link_to "Retire Keg", keg_path(@keg), method: :delete, data: {confirm: "Are you sure you want to retire this keg?"} %>

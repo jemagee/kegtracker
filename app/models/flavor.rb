@@ -7,8 +7,8 @@ class Flavor < ActiveRecord::Base
     write_attribute(:abbreviation, value.upcase)
   end
 
-  def archive
-    self.archive = true
+  def destroy
+    self.update_attributes(archive: true)
   end
   
 end

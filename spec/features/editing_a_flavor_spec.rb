@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.feature "Editing a Flavor" do
 
   let!(:flavor) {FactoryGirl.create(:flavor)}
+  let!(:flavor2) {FactoryGirl.create(:flavor)}
 
   before do
     visit flavor_path(flavor)
@@ -35,5 +36,13 @@ RSpec.feature "Editing a Flavor" do
 
     expect(page).to have_content("The flavor was not updated")
     expect(page).to have_content("four letters only")
+  end
+
+  scenario "Using an existing abbreviation" do
+    fill_in "flavor[abbreviation]", with: flavor2.abbreviation
+    click_button "Update Flavor"
+
+    expect(page).to have_content("The flavor was not updated")
+    expect(page).to have_content("already in use")
   end
 end

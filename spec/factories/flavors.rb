@@ -1,6 +1,9 @@
 FactoryGirl.define do
   factory :flavor do
-    name "Factory Flavor Name"
-    abbreviation "GGGG"
+    sequence(:name, "a")  {|n| "Factory Flavor Name#{n}"}
+    abbreviation {random_abbreviation}
   end
 end
+  def random_abbreviation
+  	('A'..'Z').to_a.shuffle.join[0..3]
+  end

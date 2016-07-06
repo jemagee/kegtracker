@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "Archiving (using delete/destroy) a flavor" do
 
-  let!(:flavor) {FactoryGirl.create(:flavor)}
+  let!(:flavor) {FactoryGirl.create(:flavor, archive: false)}
 
   scenario "Flavor is archived properly" do
 

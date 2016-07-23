@@ -14,6 +14,7 @@ RSpec.feature "Editing a Flavor" do
 
     fill_in "flavor[name]", with: "New Flavor Name"
     fill_in "flavor[abbreviation]", with: "ZZzZ"
+    fill_in "flavor[gpg]", with: 150
     click_button "Update Flavor"
 
     expect(page).to have_content("The flavor was updated")
@@ -44,5 +45,57 @@ RSpec.feature "Editing a Flavor" do
 
     expect(page).to have_content("The flavor was not updated")
     expect(page).to have_content("already in use")
+  end
+
+  scenario "Using an existing flavor name" do
+    fill_in "flavor[name]", with: flavor2.name
+    click_button "Update Flavor"
+
+    expect(page).to have_content("The flavor was not updated")
+    expect(page).to have_content("flavor name is already in the system")
+  end
+
+  scenario "Using a blank flavor name" do
+
+    fill_in "flavor[name]", with: ""
+    click_button "Update Flavor"
+
+    expect(page).to have_content("The flavor was not updated")
+    expect(page).to have_content("can't be blank")
+  end
+
+  scenario "Using a blank abbreviation" do
+
+    fill_in "flavor[abbreviation]", with: ""
+    click_button "Update Flavor"
+
+    expect(page).to have_content("The flavor was not updated")
+    expect(page).to have_content("can't be blank")
+  end
+
+  scenario "Using a grams per gallon below limit" do
+
+    fill_in "flavor[gpg]", with: 99
+    click_button "Update Flavor"
+
+    expect(page).to have_content("The flavor was not updated")
+    expect(page).to have_content("at least 100")
+  end
+
+  scenario "Using grams per gallon above limit" do
+    fill_in "flavor[gpg]", with: 3001
+    click_button "Update Flavor"
+
+    expect(page).to have_content("The flavor was not updated")
+    expect(page).to have_content("no greater than 3,000")
+  end
+
+  scenario "Blanking out the grams per gallon" do
+    fill_in "flavor[gpg]", with: ""
+    click_button "Update Flavor"
+
+    expect(page).to have_content("The flavor was updated")
+    expect(page).to have_content(flavor.name)
+    expect(page).to have_content(flavor.abbreviation.upcase)
   end
 end

@@ -45,7 +45,7 @@ class FlavorsController < ApplicationController
   private
 
   def flavor_params
-    params.require(:flavor).permit(:name, :abbreviation)
+    params.require(:flavor).permit(:name, :abbreviation, :gpg)
   end
 
   def get_flavor

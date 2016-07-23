@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.feature "Adding a new flavor" do
 
+  let!(:flavor) {FactoryGirl.create(:flavor, name: "THis Is MY funky FLAVor")}
+
   before { visit new_flavor_path }
 
   scenario "Adding a flavor with the information" do
@@ -9,6 +11,7 @@ RSpec.feature "Adding a new flavor" do
 
     fill_in "flavor[name]", with: "New Flavor Name"
     fill_in "flavor[abbreviation]", with: "abCd"
+
     click_button "Create Flavor"
 
     expect(page).to have_content("Flavor has been added")
@@ -80,6 +83,34 @@ RSpec.feature "Adding a new flavor" do
 
       expect(page).to have_content("The flavor was not created")
       expect(page).to have_content("The flavor abbreviation MUST BE four letters only")
+    end
+  end
+
+  context "Checking the grams per gallon field" do
+
+    before do
+      fill_in "flavor[name]", with: "New Flavor Name"
+      fill_in "flavor[abbreviation]", with: "ABCD"
+    end
+
+    scenario "It can be blank and the flavor can be created" do
+
+      fill_in "flavor[gpg]", with: ""
+      click_button "Create Flavor"
+
+      expect(page).to have_content("Flavor has been added")
+      expect(page).to have_content("ABCD")
+      expect(page).to have_content("New Flavor Name")
+    end
+
+    scenario "It has to be at least 100 grams" do 
+
+      fill_in "flavor[gpg]", with: 99
+
+      click_button "Create Flavor"
+
+      expect(page).to have_content("The flavor was not created")
+      expect(page).to have_content("must be at least 100 grams")
     end
   end
 

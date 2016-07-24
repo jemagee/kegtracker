@@ -1,0 +1,18 @@
+<% if @batch.errors.any? %>
+  <% @batch.errors.full_messages.each do |msg| %>
+    <p>
+      <%= msg %>
+    </p>
+  <% end %>
+<% end %>
+
+<%= form_for(@batch) do |f| %>
+  
+  <%= f.label :flavor %>
+  <%= f.collection_select(:flavor_id, Flavor.all, :id, :name) %>
+
+  <%= f.label :gallons %>
+  <%= f.number_field :gallons %>
+
+  <%= f.submit %>
+<% end %>

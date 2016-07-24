@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160723020456) do
+ActiveRecord::Schema.define(version: 20160723225444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "batches", force: :cascade do |t|
+    t.string   "lot"
+    t.integer  "flavor_id"
+    t.integer  "gallons"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "batches", ["flavor_id"], name: "index_batches_on_flavor_id", using: :btree
 
   create_table "flavors", force: :cascade do |t|
     t.string   "name"
@@ -54,4 +64,5 @@ ActiveRecord::Schema.define(version: 20160723020456) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "batches", "flavors"
 end

@@ -21,3 +21,11 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    errors:
+      models: 
+        batch:
+          attributes:
+            gallons:
+              greater_than_or_equal_to: "A batch must be at least 10 gallons"
+              less_than_or_equal_to: "A batch can not exceed 42 gallons"

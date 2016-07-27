@@ -33,7 +33,7 @@ RSpec.feature "Creating a new batch" do
 
       expect(page).to have_content("The batch was not created")
       expect(page).to have_content("Gallons can't be blank")
-      expect(page).to_not have_content("#{flavor2.name}-#{flavor2.created_at.strftime("%m%d%y")}-A")
+      expect(page).to_not have_content("#{flavor2.abbreviation}-#{flavor2.created_at.strftime("%m%d%y")}-A")
     end
 
     scenario "gallons must be a number" do
@@ -62,6 +62,26 @@ RSpec.feature "Creating a new batch" do
 
       expect(page).to have_content("The batch was not created")
       expect(page).to have_content("A batch can not exceed 42 gallons")
+    end
+  end
+
+  context "Testing the automated lot creation functionality" do
+      let!(:batch_one) {Batch.create(flavor_id: flavor1.id, gallons:20 )}
+
+    before do 
+      visit new_batch_path
+    end
+
+    scenario "The second lot number is generated properly." do
+
+      select flavor1.name, from: "batch[flavor_id]"
+      fill_in "batch[gallons]", with: 12
+
+      click_button "Create Batch"
+
+      expect(page).to have_content("The batch was created")
+      expect(page).to_not have_content(batch_one.lot)
+      expect(page).to have_content("#{flavor1.abbreviation}-#{flavor1.created_at.strftime("%m%d%y")}-B")
     end
   end
 end

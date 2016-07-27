@@ -7,6 +7,8 @@ class Batch < ActiveRecord::Base
   private
 
     def set_lot
-      self.update_attributes(lot: "#{self.flavor.abbreviation}-#{self.created_at.strftime("%m%d%y")}-A")
+      x = Batch.where(flavor_id: flavor_id, created_at: Time.now.midnight..(Time.now.midnight + 1.day)).count - 1
+      y = ("A".."Z").to_a[x]
+      self.update_attributes(lot: "#{self.flavor.abbreviation}-#{self.created_at.strftime("%m%d%y")}-#{y}")
     end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160723225444) do
+ActiveRecord::Schema.define(version: 20160803010554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20160723225444) do
     t.integer  "gallons"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date     "best_by"
   end
 
   add_index "batches", ["flavor_id"], name: "index_batches_on_flavor_id", using: :btree

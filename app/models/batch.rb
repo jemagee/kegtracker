@@ -4,9 +4,9 @@ class Batch < ActiveRecord::Base
 
   validates :gallons, presence: true, numericality: {greater_than_or_equal_to: 10, less_than_or_equal_to: 42}
 
-    def best_by
-      super.strftime("%m/%d/%y")
-    end
+  def best_by
+    super.strftime("%m/%d/%y")
+  end
 
   private
 

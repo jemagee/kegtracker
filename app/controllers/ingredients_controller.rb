@@ -24,9 +24,13 @@ class IngredientsController < ApplicationController
   end
 
   def update
-    @ingredient.update_attributes(ingredient_params)
-    flash[:success] = "Ingredient was updated"
-    redirect_to @ingredient
+    if @ingredient.update_attributes(ingredient_params)
+      flash[:success] = "Ingredient was updated"
+      redirect_to @ingredient
+    else
+      flash.now[:warning] = "Ingredient was not updated"
+      render 'edit'
+    end
   end
 
   private

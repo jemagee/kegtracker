@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
 
+  get 'ingredients/new'
+
   devise_for :users
   resources :kegs
   resources :flavors
   resources :batches
+  resources :ingredients
 
   root 'kegs#index'
   # The priority is based upon order of creation: first created -> highest priority.

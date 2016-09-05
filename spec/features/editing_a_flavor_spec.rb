@@ -75,19 +75,19 @@ RSpec.feature "Editing a Flavor" do
 
   scenario "Using a grams per gallon below limit" do
 
-    fill_in "flavor[gpg]", with: 99
+    fill_in "flavor[gpg]", with: 59
     click_button "Update Flavor"
 
     expect(page).to have_content("The flavor was not updated")
-    expect(page).to have_content("at least 100")
+    expect(page).to have_content("at least 60")
   end
 
   scenario "Using grams per gallon above limit" do
-    fill_in "flavor[gpg]", with: 3001
+    fill_in "flavor[gpg]", with: 501
     click_button "Update Flavor"
 
     expect(page).to have_content("The flavor was not updated")
-    expect(page).to have_content("no greater than 3,000")
+    expect(page).to have_content("no greater than 500")
   end
 
   scenario "Blanking out the grams per gallon" do

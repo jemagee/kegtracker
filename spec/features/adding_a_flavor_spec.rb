@@ -11,6 +11,7 @@ RSpec.feature "Adding a new flavor" do
 
     fill_in "flavor[name]", with: "New Flavor Name"
     fill_in "flavor[abbreviation]", with: "abCd"
+    fill_in "flavor[gpg]", with: 66
 
     click_button "Create Flavor"
 
@@ -103,14 +104,14 @@ RSpec.feature "Adding a new flavor" do
       expect(page).to have_content("New Flavor Name")
     end
 
-    scenario "It has to be at least 100 grams" do 
+    scenario "It has to be at least 60 grams" do 
 
-      fill_in "flavor[gpg]", with: 99
+      fill_in "flavor[gpg]", with: 59
 
       click_button "Create Flavor"
 
       expect(page).to have_content("The flavor was not created")
-      expect(page).to have_content("must be at least 100")
+      expect(page).to have_content("must be at least 60")
     end
 
     scenario "It has to be a number" do
@@ -119,16 +120,16 @@ RSpec.feature "Adding a new flavor" do
       click_button "Create Flavor"
 
       expect(page).to have_content("The flavor was not created")
-      expect(page).to have_content("must be a number greater than 100")
+      expect(page).to have_content("must be a number greater than 60")
     end
 
-    scenario "It can be no more than 3,000 games" do
-      fill_in "flavor[gpg]", with: 3001
+    scenario "It can be no more than 500 games" do
+      fill_in "flavor[gpg]", with: 501
 
       click_button "Create Flavor"
 
       expect(page).to have_content("The flavor was not created")
-      expect(page).to have_content("must be a number no greater than 3,000")
+      expect(page).to have_content("must be a number no greater than 500")
     end
   end
 

@@ -1,3 +1,18 @@
-<%= @flavor.name %>
+<div class="header">
+	<%= @flavor.name %>
+</div>
+
 <%= @flavor.abbreviation %>
+
 <%= link_to "Edit Flavor", edit_flavor_path(@flavor) %>
+
+<%= link_to "Add Component", new_flavor_component_path(@flavor) %>
+
+<% if !@flavor.components.empty? %>
+	<div class="components">
+	<% @flavor.components.each do |comp| %>
+		<%= comp.ingredient.name %>
+		<%= comp.percentage %>
+	<% end %>
+	</div>
+<% end %>

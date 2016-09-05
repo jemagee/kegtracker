@@ -1,0 +1,21 @@
+<div class="header">
+	<h3>Add Components to Recipe for <%= @flavor.name %></h3>
+</div>
+
+<% if @component.errors.any? %>
+	<% @component.errors.full_messages.each do |msg| %>
+		<%= msg %>
+	<% end %>
+<% end %>
+
+<%= form_for [@flavor, @component] do |f| %>
+	
+	<%= f.label :ingredient_id, "Ingredient" %>
+	<%= f.collection_select(:ingredient_id, Ingredient.all, :id, :name, prompt: "Select the ingredent") %>
+
+	<%= f.label :percentage, "Pct in Flavor" %>
+	<%= f.number_field :percentage %>
+
+	<%= f.submit "Add Component" %>
+
+<% end %>

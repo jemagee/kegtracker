@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
 
+  get 'components/new'
+
+  get 'components/new'
+
   get 'ingredients/new'
 
   devise_for :users
   resources :kegs
-  resources :flavors
+  resources :flavors do
+    resources :components
+  end
   resources :batches
   resources :ingredients
 

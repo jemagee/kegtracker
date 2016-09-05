@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160820202308) do
+ActiveRecord::Schema.define(version: 20160905210029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,17 @@ ActiveRecord::Schema.define(version: 20160820202308) do
   end
 
   add_index "batches", ["flavor_id"], name: "index_batches_on_flavor_id", using: :btree
+
+  create_table "components", force: :cascade do |t|
+    t.integer  "flavor_id"
+    t.integer  "ingredient_id"
+    t.decimal  "percentage",    precision: 8, scale: 5
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
+  add_index "components", ["flavor_id"], name: "index_components_on_flavor_id", using: :btree
+  add_index "components", ["ingredient_id"], name: "index_components_on_ingredient_id", using: :btree
 
   create_table "flavors", force: :cascade do |t|
     t.string   "name"
@@ -72,4 +83,6 @@ ActiveRecord::Schema.define(version: 20160820202308) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "batches", "flavors"
+  add_foreign_key "components", "flavors"
+  add_foreign_key "components", "ingredients"
 end

@@ -29,3 +29,10 @@ en:
             gallons:
               greater_than_or_equal_to: "A batch must be at least 10 gallons"
               less_than_or_equal_to: "A batch can not exceed 42 gallons"
+      models:
+        component:
+          attributes:
+            percentage:
+              blank: "You must include a percentage for an ingredient"
+              less_than_or_equal_to: "An ingredient percentage can not exceed 100%"
+              not_a_number: "Percentage must be a number"

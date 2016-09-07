@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.feature "Adding Flavor Components" do
 
 	let(:flavor) {FactoryGirl.create(:flavor)}
+	let(:flavor2) {FactoryGirl.create(:flavor)}
 
 	5.times do |n|
 		let!("ingredient#{n}".to_s) { FactoryGirl.create(:ingredient) }
@@ -65,4 +66,31 @@ RSpec.feature "Adding Flavor Components" do
 			expect(page).to have_content("An ingredient percentage can not exceed 100%")
 		end
 	end
+
+	context "Does not allow the same component to be added twice" do
+
+		before  {FactoryGirl.create(:component, flavor: flavor, ingredient: ingredient4)}
+
+		scenario "Duplicated component can not be added" do
+			select ingredient4.name, from: "component[ingredient_id]"
+			fill_in "component[percentage]", with: 13
+
+			click_button "Add Component"
+
+			expect(page).to have_content("The component was not added")
+			expect(page).to have_content("This ingredient is already part of the flavor recipe")
+		end
+
+		scenario "Same Ingredient can be added to a different flavor" do
+
+			visit flavor_path(flavor2)
+			click_link "Add Component"
+			select ingredient4.name, from: "component[ingredient_id]"
+			fill_in "component[percentage]", with: 13
+
+			click_button "Add Component"
+
+			expect(page).to have_content("#{ingredient4.name} was added to the recipe for #{flavor2.name}")
+		end
+	end	
 end

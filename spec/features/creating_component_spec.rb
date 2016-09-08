@@ -93,4 +93,21 @@ RSpec.feature "Adding Flavor Components" do
 			expect(page).to have_content("#{ingredient4.name} was added to the recipe for #{flavor2.name}")
 		end
 	end	
+
+	context "Checking the flavor component limitations" do
+
+		before {FactoryGirl.create(:component, flavor: flavor, ingredient: ingredient4, percentage: 100)}
+
+		scenario "Does not allow an a flavors compopnents to add up to more than 100" do
+
+	
+			select ingredient3.name, from: "component[ingredient_id]"
+			fill_in "component[percentage]", with: 3.7
+
+		  click_button "Add Component"
+
+			expect(page).to have_content("The component was not added")
+			expect(page).to have_content("The total of all a flavors components can not exceed 100 percent")
+		end
+	end
 end

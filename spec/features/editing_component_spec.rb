@@ -8,8 +8,4 @@ RSpec.feature  "Edting a Flavor Component" do
 	end
 	let!(:component) {FactoryGirl.create(:component, flavor: flavor, ingredient: ingredient1)}
 	let!(:component2) {FactoryGirl.create(:component, flavor: flavor, ingredient: ingredient2)}
-
-	scenario "with proper information" do
-
-		visit flavor_path()
 end

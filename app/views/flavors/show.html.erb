@@ -11,8 +11,11 @@
 <% if !@flavor.components.empty? %>
 	<div class="components">
 	<% @flavor.components.each do |comp| %>
-		<%= comp.ingredient.name %>
-		<%= comp.percentage %>
+		<%= div_for(comp) do %>
+			<%= comp.ingredient.name %>
+			<%= comp.percentage %>
+			<%= link_to "Edit Ingredient", edit_flavor_component_path(@flavor, comp) %>
+		<% end %>
 	<% end %>
 	</div>
 <% end %>

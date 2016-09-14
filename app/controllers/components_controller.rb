@@ -1,6 +1,7 @@
 class ComponentsController < ApplicationController
-  
-	before_action :get_flavor
+
+  before_action :get_flavor
+  before_action :get_component, only: [:edit, :update, :destroy]
 
   def new
   	@component = @flavor.components.build
@@ -17,6 +18,15 @@ class ComponentsController < ApplicationController
   	end
   end
 
+  def edit
+  end
+
+  def update
+    @component.update(component_params)
+    flash[:success] = "The component has been updated"
+    redirect_to @flavor
+  end
+
   private
 
   	def get_flavor
@@ -26,4 +36,8 @@ class ComponentsController < ApplicationController
   	def component_params
   		params.require(:component).permit(:ingredient_id, :percentage)
   	end
+
+    def get_component
+      @component = @flavor.components.find(params[:id])
+    end
 end

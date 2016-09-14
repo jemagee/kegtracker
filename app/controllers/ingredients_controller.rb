@@ -2,6 +2,10 @@ class IngredientsController < ApplicationController
 
   before_action :get_ingredient, only: [:edit, :update, :show, :destroy]
 
+  def index
+    @ingredients = Ingredient.all
+  end
+  
   def new
     @ingredient = Ingredient.new
   end

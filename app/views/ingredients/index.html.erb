@@ -1,0 +1,9 @@
+<h1>Ingredients</h1>
+
+<% @ingredients.each do |ingredient| %>
+	<div class="row">
+		<%= div_for(ingredient) do %>
+			<%= link_to ingredient.name, ingredient_path(ingredient) %>
+		<% end %>
+	</div>
+<% end %>

@@ -39,8 +39,13 @@ class IngredientsController < ApplicationController
 
   def destroy
     @ingredient.destroy
-    flash[:success] = "The ingredient was deleted" 
-    redirect_to ingredients_path
+    if Ingredient.find_by(id: params[:id])
+      flash[:warning] = "The ingredient has been archived, it could not be deleted"
+      redirect_to @ingredient
+    else
+      flash[:success] = "The ingredient was deleted" 
+      redirect_to ingredients_path
+    end
   end
 
   private

@@ -5,7 +5,10 @@ RSpec.feature "Editing an ingredient" do
   let(:ingredient) { FactoryGirl.create(:ingredient) }
   let(:ingredient2) { FactoryGirl.create(:ingredient) }
 
-  before { visit edit_ingredient_path(ingredient) }
+  before do 
+    visit ingredient_path(ingredient)
+    click_link "Edit #{ingredient.name}"
+  end
 
   scenario "works with a valid name" do
 

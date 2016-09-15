@@ -37,6 +37,12 @@ class IngredientsController < ApplicationController
     end
   end
 
+  def destroy
+    @ingredient.destroy
+    flash[:success] = "The ingredient was deleted" 
+    redirect_to ingredients_path
+  end
+
   private
 
     def ingredient_params

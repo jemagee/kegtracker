@@ -19,6 +19,4 @@ class Batch < ActiveRecord::Base
     def set_bestby
       self.update_attributes(best_by: self.created_at + 90.days)
     end
-
-
 end

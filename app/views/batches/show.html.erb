@@ -2,3 +2,5 @@
 <%= @batch.lot %>
 <%= @batch.gallons %>
 Best By Date: <%= @batch.best_by %>
+<%=link_to "Edit Batch", edit_batch_path(@batch) %>
+<%= @batch.lot[-1] %>

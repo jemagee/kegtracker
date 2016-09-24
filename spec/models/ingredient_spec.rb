@@ -1,5 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Ingredient, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before {@ingredient = FactoryGirl.build(:ingredient)}
+
+  it "should have a default archive value of false" do
+
+  	expect(@ingredient.archived).to be(false)
+  end
 end

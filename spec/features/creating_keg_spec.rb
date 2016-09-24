@@ -13,6 +13,12 @@ RSpec.feature "Creating Kegs" do
     within("div.success") do
       expect(page).to have_content("Keg has been added")
     end
+    within("div.status") do
+      expect(page).to have_content("Status: Empty")
+    end
+    within("div.location") do
+      expect(page).to have_content("Location: Teeccino Warehouse")
+    end
   end
 
   scenario "A serial Number is required" do
@@ -46,25 +52,5 @@ RSpec.feature "Creating Kegs" do
       expect(page).to have_content("The keg was not added")
     end
     expect(page).to have_content("Please use a properly formatted serial number")
-  end
-
-  scenario "A keg has its status set to empty by default" do
-
-    fill_in "keg[serial_number]", with: "16-123456B"
-    click_button "Create Keg"
-
-    within ("div.status") do
-      expect(page).to have_content("Empty")
-    end
-  end
-
-  scenario "A keg has its location set to Teeccino Warehouse by default" do
-
-    fill_in "keg[serial_number]", with: "16-123456B"
-    click_button "Create Keg"
-
-    within ("div.location") do
-      expect(page).to have_content("Teeccino Warehouse")
-    end
   end
 end

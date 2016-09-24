@@ -1,5 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Flavor, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before {@flavor = FactoryGirl.build(:flavor)}
+
+  it "should have a default archive as false" do
+  	expect(@flavor.archive).to be(false)
+  end
 end

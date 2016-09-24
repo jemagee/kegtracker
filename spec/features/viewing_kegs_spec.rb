@@ -21,5 +21,8 @@ RSpec.feature "Viewing all and individual kegs" do
 			expect(page).to have_content("Consigned")
 			expect(page).to_not have_content("Empty")
 		end
+		within("div.location") do 
+			expect(page).to have_content("Teeccino Warehouse")
+		end
 	end
 end

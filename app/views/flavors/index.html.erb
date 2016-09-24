@@ -1,8 +1,8 @@
 <% @flavors.each do |f| %>
-  <div>
+  <%= div_for f  do %>
     <%= f.name %>
     <%= link_to "Flavor Detail", flavor_path(f) %>
     <%= link_to "Archive Flavor", flavor_path(f), method: :delete, data: {confirm: "Are you sure you want to archive this flavor"} %>
-  </div>
+  <% end %>
 <% end %>
 

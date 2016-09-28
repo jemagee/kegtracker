@@ -3,6 +3,7 @@ class Batch < ActiveRecord::Base
   after_create :set_lot, :set_bestby
 
   validates :gallons, presence: true, numericality: {greater_than_or_equal_to: 10, less_than_or_equal_to: 42}
+  validates :flavor_id, presence: true
 
   def best_by
     super.strftime("%m/%d/%y")

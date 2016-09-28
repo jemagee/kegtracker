@@ -21,7 +21,7 @@ RSpec.feature "Creating a new batch" do
     expect(page).to have_content("Best By Date: #{(Date.today + 90.days).strftime("%m/%d/%y")}")
   end
 
-  context "Testing validation of the gallons entry" do
+  context "requires a valid entry of gallons" do
 
     before do
       visit new_batch_path
@@ -64,6 +64,16 @@ RSpec.feature "Creating a new batch" do
       expect(page).to have_content("The batch was not created")
       expect(page).to have_content("A batch can not exceed 42 gallons")
     end
+  end
+
+  scenario "rquires a selection of a valid flavor" do
+
+    visit new_batch_path
+    fill_in "batch[gallons]", with: 25
+    click_button "Create Batch"
+
+    expect(page).to have_content("The batch was not created")
+    expect(page).to have_content("You must select a valid flavor to create a batch")
   end
 
   context "Testing the automated lot creation functionality" do

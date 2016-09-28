@@ -8,6 +8,10 @@
 
 <%= link_to "Add Component", new_flavor_component_path(@flavor) %>
 
+<%= link_to "Create Batch From #{@flavor.name}", new_batch_path(flavor: @flavor.id) %>
+
+<%= link_to "Create FULL Batch from #{@flavor.name}", new_batch_path(flavor: @flavor.id, gallons: 42) %>
+
 <% if !@flavor.components.empty? %>
 	<div class="components">
 	<% @flavor.components.each do |comp| %>

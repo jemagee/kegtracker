@@ -9,7 +9,11 @@
 <%= form_for(batch) do |f| %>
   
   <%= f.label :flavor %>
-  <%= f.collection_select(:flavor_id, Flavor.all, :id, :name, prompt: true) %>
+  <% if !batch.flavor_id.nil? %>
+    <%= f.collection_select(:flavor_id, Flavor.all, :id, :name, selected: batch.flavor_id) %>
+  <% else %>
+    <%= f.collection_select(:flavor_id, Flavor.all, :id, :name, prompt: true) %>
+  <% end %>
 
   <%= f.label :gallons %>
   <%= f.number_field :gallons %>

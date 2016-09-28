@@ -3,7 +3,17 @@ class BatchesController < ApplicationController
   before_action :get_batch, only: [:edit, :show, :update]
 
   def new
-    @batch = Batch.new
+    if params[:flavor]
+      if params[:gallons]
+        @batch = Batch.create(flavor_id: params[:flavor], gallons: params[:gallons])
+        flash[:success] = "The batch was created"
+        redirect_to @batch
+      else
+        @batch = Batch.new(flavor_id: params[:flavor])
+      end
+    else
+      @batch = Batch.new
+    end
   end
 
   def create 

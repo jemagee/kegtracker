@@ -42,3 +42,4 @@ To build a system to track the kegs used at my company to proudce our nitrogenat
 * Modifying an attr_reader to format a date field display the way I want to see it.
 * Using pattern matching in validation.
 * Expanding devise basics to include attributes representing first and last name of user.
+* Creating a child record via the childs 'new' method but starting with the parent when the parent is part of a drop down on the child new form

@@ -95,4 +95,28 @@ RSpec.feature "Creating a new batch" do
       expect(page).to have_content("#{flavor1.abbreviation}-#{flavor1.created_at.strftime("%m%d%y")}-B")
     end
   end
+
+  scenario "from a flavor page works as well" do
+    visit flavor_path(flavor1)
+
+    click_link "Create Batch From #{flavor1.name}"
+
+    fill_in "batch[gallons]", with: 40
+
+    click_button "Create Batch"
+    expect(page).to have_content("The batch was created")
+    expect(page).to have_content(flavor1.name)
+    expect(page).to have_content(flavor1.abbreviation)
+  end
+
+  scenario "from a flavor page with a 'full load' (42 gallons) works as well" do
+
+    visit flavor_path(flavor3)
+
+    click_link "Create FULL Batch from #{flavor3.name}"
+
+    expect(page).to have_content("The batch was created")
+    expect(page).to have_content(flavor3.name)
+    expect(page).to have_content(flavor3 .abbreviation)
+  end
 end

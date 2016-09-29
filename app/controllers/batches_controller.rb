@@ -1,6 +1,6 @@
 class BatchesController < ApplicationController
 
-  before_action :get_batch, only: [:edit, :show, :update]
+  before_action :get_batch, only: [:edit, :show, :update, :destroy]
 
   def new
     if params[:flavor]
@@ -45,6 +45,12 @@ class BatchesController < ApplicationController
       flash[:warning] = "The batch was not changed"
       render 'edit'
     end
+  end
+
+  def destroy
+    @batch.destroy
+    flash[:success] = "The batch has been deleted"
+    redirect_to root_path
   end
 
 

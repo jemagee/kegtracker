@@ -1,7 +1,7 @@
 class ComponentsController < ApplicationController
 
   before_action :get_flavor
-  before_action :get_component, only: [:edit, :update, :destroy]
+  before_action :get_component, only: [:edit, :update, :destroy, :show]
 
   def new
   	@component = @flavor.components.build
@@ -18,12 +18,21 @@ class ComponentsController < ApplicationController
   	end
   end
 
+  def show
+  end
+
   def edit
   end
 
   def update
     @component.update(component_params)
     flash[:success] = "The component has been updated"
+    redirect_to @flavor
+  end
+
+  def destroy
+    @component.destroy
+    flash[:success] = "The component has been removed from the recipe"
     redirect_to @flavor
   end
 

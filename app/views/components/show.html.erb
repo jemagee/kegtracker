@@ -1,0 +1,5 @@
+<%= @component.flavor.name %>
+<%= @component.ingredient.name %>
+<%= @component.percentage %>
+<%= link_to "Edit Component", edit_flavor_component_path(@flavor, @component) %>
+<%= link_to "Delete Component", [@flavor, @component], method: :delete, data: {confirm: "Are you sure you want to remove #{@component.ingredient.name} from the recipe for #{@component.flavor.name}"} %>

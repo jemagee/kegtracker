@@ -1,0 +1,8 @@
+<h1>Batches</h1>
+
+<% @batches.each do |batch| %>
+	<%= div_for(batch) do %>
+		<%= link_to batch.lot, batch_path(batch) %>
+		<%= batch.flavor.name %>
+	<% end %>
+<% end %>

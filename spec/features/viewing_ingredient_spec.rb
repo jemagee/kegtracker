@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Viewing ingredients" do
+RSpec.feature "Viewing an ingredient" do
 
 	let!(:ingredient) {FactoryGirl.create(:ingredient)}
 	let!(:ingredient2) {FactoryGirl.create(:ingredient)}

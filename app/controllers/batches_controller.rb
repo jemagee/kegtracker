@@ -2,6 +2,10 @@ class BatchesController < ApplicationController
 
   before_action :get_batch, only: [:edit, :show, :update, :destroy]
 
+  def index
+    @batches = Batch.all
+  end
+
   def new
     if params[:flavor]
       if params[:gallons]

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "Viewing all and individual kegs" do
 	let!(:keg) { FactoryGirl.create(:keg) }
-	let!(:kegg) { FactoryGirl.create(:keg, status: "Consigned") }
+	let!(:kegg) { FactoryGirl.create(:keg, status: 4) }
 
 	before { visit kegs_path }
 

@@ -6,7 +6,16 @@ RSpec.feature "Creating a new batch" do
     let!("flavor#{n}".to_s) {FactoryGirl.create(:flavor)}
   end
 
+  let(:ingredient) {FactoryGirl.create(:ingredient)}
+
   let!(:date) {Date.today.strftime("%m%d%y")}
+
+  before do
+    FactoryGirl.create(:component, flavor: flavor0, ingredient: ingredient, percentage: 100)
+    FactoryGirl.create(:component, flavor: flavor1, ingredient: ingredient, percentage: 100)
+    FactoryGirl.create(:component, flavor: flavor2, ingredient: ingredient, percentage: 100)
+    FactoryGirl.create(:component, flavor: flavor3, ingredient: ingredient, percentage: 100)
+  end
 
   scenario "Successfully creating the batch" do
     visit new_batch_path

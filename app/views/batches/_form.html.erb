@@ -10,9 +10,9 @@
   
   <%= f.label :flavor %>
   <% if !batch.flavor_id.nil? %>
-    <%= f.collection_select(:flavor_id, Flavor.all, :id, :name, selected: batch.flavor_id) %>
+    <%= f.collection_select(:flavor_id, Flavor.batch_eligible, :id, :name, selected: batch.flavor_id) %>
   <% else %>
-    <%= f.collection_select(:flavor_id, Flavor.all, :id, :name, prompt: true) %>
+    <%= f.collection_select(:flavor_id, Flavor.batch_eligible, :id, :name, prompt: true) %>
   <% end %>
 
   <%= f.label :gallons %>

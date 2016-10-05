@@ -5,8 +5,11 @@ RSpec.feature "Editing a Batch" do
 	let!(:flavor) {FactoryGirl.create(:flavor)}
 	let(:batch) {FactoryGirl.create(:batch, flavor: flavor, gallons: 15)}
 	let!(:flavor2) {FactoryGirl.create(:flavor)}
+	let(:ingredient) {FactoryGirl.create(:ingredient)}
 
 	before  do
+    FactoryGirl.create(:component, flavor: flavor, ingredient: ingredient, percentage: 100)
+    FactoryGirl.create(:component, flavor: flavor2, ingredient: ingredient, percentage: 100)
 		visit batch_path(batch)
 		click_link "Edit Batch"
 	end

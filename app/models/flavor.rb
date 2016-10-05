@@ -3,6 +3,8 @@ class Flavor < ActiveRecord::Base
   has_many :components
   has_many :ingredients, through: :components
 
+  scope :batch_eligible, -> {joins(:components).having('SUM(percentage) = 100').group('flavors.id')}
+
   validates :name, presence: true, uniqueness: {case_sensitive: false, message: "This flavor name is already in the system"}, format:{with: /\A[a-zA-z\s]{6,}\z/, message: "The flavor name must be at least 6 characters (with no numbers)"}
   validates :abbreviation, presence: true, uniqueness: {message: "This abbreviation is already in use"}, format:{with: /\A[A-Z]{4}\z/, message: "The flavor abbreviation MUST BE four letters only"}
   with_options if: Proc.new { |a| !a.gpg.nil?}, on: [:create, :update] do |flavor|
@@ -19,5 +21,14 @@ class Flavor < ActiveRecord::Base
   def destroy
     self.update_attributes(archive: true)
   end
+
+  def self.batch_eligible_test
+    find_by_sql("SELECT flavors.* FROM flavors
+    INNER JOIN components on flavors.id = components.flavor_id
+    GROUP BY flavors.id, flavors.name
+    HAVING SUM(percentage)=100")
+  end
+
+
   
 end

@@ -22,13 +22,6 @@ class Flavor < ActiveRecord::Base
     self.update_attributes(archive: true)
   end
 
-  def self.batch_eligible_test
-    find_by_sql("SELECT flavors.* FROM flavors
-    INNER JOIN components on flavors.id = components.flavor_id
-    GROUP BY flavors.id, flavors.name
-    HAVING SUM(percentage)=100")
-  end
-
 
   
 end

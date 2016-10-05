@@ -43,3 +43,4 @@ To build a system to track the kegs used at my company to proudce our nitrogenat
 * Using pattern matching in validation.
 * Expanding devise basics to include attributes representing first and last name of user.
 * Creating a child record via the childs 'new' method but starting with the parent when the parent is part of a drop down on the child new form
+* Writing a complex scope that filters records based on an aggregate of a field in related records

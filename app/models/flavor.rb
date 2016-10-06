@@ -22,6 +22,10 @@ class Flavor < ActiveRecord::Base
     self.update_attributes(archive: true)
   end
 
+  def batch_eligible?
+    self.components.sum('percentage') == 100
+  end
+
 
   
 end

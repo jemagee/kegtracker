@@ -1,5 +1,6 @@
 class Batch < ActiveRecord::Base
   belongs_to :flavor
+  has_many :components, through: :flavor
   before_create :check_batch_eligiblity
   after_create :set_lot, :set_bestby
 

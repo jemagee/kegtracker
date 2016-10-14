@@ -49,4 +49,10 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.include Warden::Test::Helpers, type: :feature
   config.after(type: :feature) { Warden.test_reset!}
+  Shoulda::Matchers.configure do |config|
+    config.integrate do |with|
+      with.test_framework :rspec
+      with.library :rails
+    end
+  end
 end

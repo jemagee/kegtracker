@@ -1,5 +1,6 @@
 class Batch < ActiveRecord::Base
   belongs_to :flavor
+  before_create :check_batch_eligiblity
   after_create :set_lot, :set_bestby
 
   validates :gallons, presence: true, numericality: {greater_than_or_equal_to: 10, less_than_or_equal_to: 42}
@@ -19,5 +20,9 @@ class Batch < ActiveRecord::Base
 
     def set_bestby
       self.update_attributes(best_by: self.created_at + 90.days)
+    end
+
+    def check_batch_eligiblity
+      self.flavor.batch_eligible?
     end
 end

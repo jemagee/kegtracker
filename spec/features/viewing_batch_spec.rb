@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.feature "Viewing a Batch" do
 
 	let(:flavor) {FactoryGirl.create(:flavor)}
+	let(:ingredient) {FactoryGirl.create(:ingredient)}
+	let!(:component) {FactoryGirl.create(:component, flavor: flavor, ingredient: ingredient, percentage: 100)}
 	let!(:batch) {FactoryGirl.create(:batch, flavor: flavor)}
 	let!(:batch1) {FactoryGirl.create(:batch, flavor: flavor)}
 

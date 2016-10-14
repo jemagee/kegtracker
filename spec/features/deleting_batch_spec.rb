@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.feature "Deleting a batch" do
 
-	let!(:flavor) {FactoryGirl.create(:flavor)}
+	let(:flavor) {FactoryGirl.create(:flavor)}
+	let(:ingredient) {FactoryGirl.create(:ingredient)}
+	let!(:component) {FactoryGirl.create(:component, flavor: flavor, ingredient: ingredient, percentage: 100)}
 	let(:batch) {FactoryGirl.create(:batch, flavor: flavor)}
 
 	before {visit batch_path(batch)}

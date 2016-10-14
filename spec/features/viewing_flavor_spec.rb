@@ -51,6 +51,9 @@ RSpec.feature "Viewing a flavor" do
 			expect(page).to have_content(flavor1.name)
 			expect(page).to_not have_link "Create Batch"
 			expect(page).to_not have_link "Create FULL Batch"
+			within("span.warning") do
+				expect(page).to have_content "Batches of this flavor can not be made until the recipe is cmoplete"
+			end
 		end
 	end
 end

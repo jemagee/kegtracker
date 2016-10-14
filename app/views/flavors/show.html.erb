@@ -11,6 +11,8 @@
 <% if @flavor.batch_eligible? %>
 	<%= link_to "Create Batch From #{@flavor.name}", new_batch_path(flavor: @flavor.id) %>
 	<%= link_to "Create FULL Batch from #{@flavor.name}", new_batch_path(flavor: @flavor.id, gallons: 42) %>
+<% else %>
+	<span class="warning">Batches of this flavor can not be made until the recipe is cmoplete</span>
 <% end %>
 
 <% if !@flavor.components.empty? %>

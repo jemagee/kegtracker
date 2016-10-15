@@ -22,9 +22,11 @@ RSpec.feature "Editing a Batch" do
 		click_button "Update Batch"
 
 		expect(page).to have_content flavor2.abbreviation
-		expect(page).to have_content 25
+		within("div#gallons") do
+			expect(page).to have_content 25
+			expect(page).to_not have_content 15
+		end
 		expect(page).to_not have_content flavor.abbreviation
-		expect(page).to_not have_content 15
 	end
 
 	scenario "Work with just changing the batch gallons (custom controller function test)" do

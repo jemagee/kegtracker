@@ -7,7 +7,8 @@ RSpec.describe Flavor, type: :model do
   let!(:component) {FactoryGirl.create(:component, flavor: flavor, ingredient: ingredient, percentage: 25)}
   let!(:component1) {FactoryGirl.create(:component, flavor: flavor2, ingredient: ingredient, percentage: 100)}
 
-  it { should validate_uniqueness_of(:name) }
+  it { should validate_uniqueness_of(:name).case_insensitive.with_message("This flavor name is already in the system") }
+  it { should validate_uniqueness_of(:abbreviation).case_insensitive.with_message("This abbreviation is already in use")}
   it "should have a default archive as false" do
     expect(flavor.archive).to be(false)
   end

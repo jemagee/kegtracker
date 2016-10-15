@@ -23,7 +23,7 @@ class Flavor < ActiveRecord::Base
   end
 
   def batch_eligible?
-    self.components.sum('percentage') == 100
+    self.components.sum('percentage') == 100 && !(self.gpg.nil?)
   end
 
 

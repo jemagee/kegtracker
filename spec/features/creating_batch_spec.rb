@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "Creating a new batch" do
 
   4.times do |n|
-    let!("flavor#{n}".to_s) {FactoryGirl.create(:flavor)}
+    let!("flavor#{n}".to_s) {FactoryGirl.create(:flavor, gpg: 100)}
   end
 
   let(:ingredient) {FactoryGirl.create(:ingredient)}

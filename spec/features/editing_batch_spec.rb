@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.feature "Editing a Batch" do
 
-	let!(:flavor) {FactoryGirl.create(:flavor)}
+	let!(:flavor) {FactoryGirl.create(:flavor, gpg: 100)}
 	let(:batch) {FactoryGirl.create(:batch, flavor: flavor, gallons: 15)}
-	let!(:flavor2) {FactoryGirl.create(:flavor)}
+	let!(:flavor2) {FactoryGirl.create(:flavor, gpg: 100)}
 	let(:ingredient) {FactoryGirl.create(:ingredient)}
 
 	before  do

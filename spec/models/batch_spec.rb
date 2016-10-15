@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Batch, type: :model do
   let!(:flavor) {FactoryGirl.create(:flavor)}
-  let!(:flavor2) {FactoryGirl.create(:flavor)}
+  let!(:flavor2) {FactoryGirl.create(:flavor, gpg: 125)}
   let!(:ingredient) {FactoryGirl.create(:ingredient)}
   let!(:component) {FactoryGirl.create(:component, flavor: flavor, ingredient: ingredient, percentage: 25)}
   let!(:component1) {FactoryGirl.create(:component, flavor: flavor2, ingredient: ingredient, percentage: 100)}

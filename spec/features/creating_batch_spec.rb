@@ -75,7 +75,7 @@ RSpec.feature "Creating a new batch" do
     end
   end
 
-  scenario "rquires a selection of a valid flavor" do
+  scenario "requires a selection of a valid flavor" do
 
     visit new_batch_path
     fill_in "batch[gallons]", with: 25

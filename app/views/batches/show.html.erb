@@ -7,3 +7,11 @@
 Best By Date: <%= @batch.best_by %>
 <%=link_to "Edit Batch", edit_batch_path(@batch) %>
 <%= link_to "Delete Batch", batch_path(@batch), method: :delete, data: {confirm: "Are you sure you want to delete this batch?"} %>
+<div id="components">
+	<% @batch.components.each do |component| %>
+		<%= div_for(component.ingredient) do %>
+			<%= component.ingredient.name %>
+			<%= component.percentage * @batch.gallons * @batch.flavor.gpg %>
+		<% end %>
+	<% end %>
+</div>

@@ -8,6 +8,7 @@ RSpec.describe Batch, type: :model do
   let!(:component1) {FactoryGirl.create(:component, flavor: flavor2, ingredient: ingredient, percentage: 100)}
 
   it { should validate_presence_of(:gallons) }
+  it { should validate_numericality_of(:gallons)}
   it { should have_many(:components)}
 
   it "should not allow batch creation of flavor that isn't batch eligible" do

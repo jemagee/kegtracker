@@ -20,7 +20,7 @@ class Batch < ActiveRecord::Base
     end
 
     def set_bestby
-      self.update_attributes(best_by: self.created_at + 90.days)
+      self.update_attributes(best_by: self.created_at + 120.days)
     end
 
     def check_batch_eligiblity

@@ -4,8 +4,10 @@ RSpec.describe Batch, type: :model do
   let!(:flavor) {FactoryGirl.create(:flavor)}
   let!(:flavor2) {FactoryGirl.create(:flavor, gpg: 125)}
   let!(:ingredient) {FactoryGirl.create(:ingredient)}
+  let!(:ingredient2) {FactoryGirl.create(:ingredient)}
   let!(:component) {FactoryGirl.create(:component, flavor: flavor, ingredient: ingredient, percentage: 25)}
-  let!(:component1) {FactoryGirl.create(:component, flavor: flavor2, ingredient: ingredient, percentage: 100)}
+  let!(:component1) {FactoryGirl.create(:component, flavor: flavor2, ingredient: ingredient, percentage: 5)}
+  let!(:component2) {FactoryGirl.create(:component, flavor: flavor2, ingredient: ingredient2, percentage: 95 )}
 
   it { should validate_presence_of(:gallons) }
   it { should validate_numericality_of(:gallons)}
@@ -17,6 +19,11 @@ RSpec.describe Batch, type: :model do
 
   it "should allow batch batch creation of a flavor that is batch eleigible" do
   	expect{Batch.create(flavor: flavor2, gallons: 20)}.to change{Batch.count}.by(1)
+  end
+
+
+  it "should return the ingredients in reverse order of percentage" do
+    expect(Batch.create(flavor: flavor2, gallons:20).components.first.ingredient).to eq ingredient2
   end
 
 end

@@ -6,6 +6,8 @@ class Component < ActiveRecord::Base
   validates :ingredient_id, uniqueness: {scope: :flavor, message: "This ingredient is already part of the flavor recipe"}
   validate :flavor_components_sum_can_not_exceed_one_hundred
 
+  default_scope {order("percentage DESC")}
+
   def flavor_components_sum_can_not_exceed_one_hundred
   	if !self.percentage.nil?
   		if self.percentage + self.flavor.components.sum('percentage') > 100

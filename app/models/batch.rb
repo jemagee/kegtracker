@@ -7,6 +7,8 @@ class Batch < ActiveRecord::Base
   validates :gallons, presence: true, numericality: {greater_than_or_equal_to: 10, less_than_or_equal_to: 42}
   validates :flavor_id, presence: true
 
+  enum status: [:pending, :in_progress, :priming, :completed]
+
   def best_by
     super.strftime("%m/%d/%y")
   end

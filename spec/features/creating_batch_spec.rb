@@ -28,6 +28,9 @@ RSpec.feature "Creating a new batch" do
     expect(page).to have_content("The batch was created")
     expect(page).to have_content("#{flavor3.abbreviation}-#{flavor3.created_at.strftime("%m%d%y")}-A")
     expect(page).to have_content("Best By Date: #{(Date.today + 120.days).strftime("%m/%d/%y")}")
+    within("div#status") do
+      expect(page).to have_content("Status: Pending")
+    end
   end
 
   context "requires a valid entry of gallons" do

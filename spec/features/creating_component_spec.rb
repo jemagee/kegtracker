@@ -19,7 +19,7 @@ RSpec.feature "Adding Flavor Components" do
 	scenario "Adding a comoponent properly" do
 
 		select ingredient2.name, from: "component[ingredient_id]"
-		fill_in "component[percentage]", with: 25
+		fill_in "component[percentage]", with: 25.2
 
 		click_button "Add Component"
 
@@ -29,6 +29,7 @@ RSpec.feature "Adding Flavor Components" do
 		end
 		within("div.components") do
 			expect(page).to have_content(ingredient2.name)
+			expect(page).to have_content(25.2)
 		end
 	end 
 
